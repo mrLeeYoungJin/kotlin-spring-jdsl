@@ -13,7 +13,6 @@ import javax.persistence.Query
 
 @Service
 class UserService(
-    private val userRepository: UserRepository,
     private val queryFactory: SpringDataQueryFactory,
 ) {
 
