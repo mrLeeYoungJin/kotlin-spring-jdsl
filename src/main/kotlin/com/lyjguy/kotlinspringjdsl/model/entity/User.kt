@@ -17,7 +17,7 @@ class User(
     var name: String,
     var email: String,
     var password: String,
-    @Enumerated
+    @Enumerated(EnumType.STRING)
     val userType: UserType,
     @CreatedDate
     var createdAt: LocalDateTime = LocalDateTime.now(),
