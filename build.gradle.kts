@@ -29,8 +29,20 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     implementation("com.linecorp.kotlin-jdsl:spring-data-kotlin-jdsl-starter:2.0.3.RELEASE")
+    implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 
-    runtimeOnly("mysql:mysql-connector-java")
+    // Querydsl
+    implementation("com.querydsl:querydsl-jpa")
+
+    // Querydsl JPAAnnotationProcessor 사용 지정
+    implementation("com.querydsl:querydsl-apt:5.0.0")
+    // java.lang.NoClassDefFoundError(javax.annotation.Entity) 발생 대응
+    annotationProcessor("jakarta.persistence:jakarta.persistence-api")
+    // java.lang.NoClassDefFoundError(javax.annotation.Generated) 발생 대응
+    annotationProcessor("jakarta.annotation:jakarta.annotation-api")
+
+    runtimeOnly("com.h2database:h2")
+    //runtimeOnly("mysql:mysql-connector-java")
     annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("io.mockk:mockk:1.12.4")
