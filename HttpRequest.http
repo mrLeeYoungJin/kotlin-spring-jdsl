@@ -1,0 +1,7 @@
+### user get
+GET http://localhost:8080/api/v1/users/1
+
+
+### user post
+POST http://localhost:8080/api/v1/users
+Content-Type: application/json
