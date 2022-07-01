@@ -6,6 +6,7 @@ plugins {
     kotlin("jvm") version "1.6.21"
     kotlin("plugin.spring") version "1.6.21"
     kotlin("plugin.jpa") version "1.6.21"
+    kotlin("kapt") version "1.7.0"
 }
 
 group = "com.lyjguy"
@@ -33,13 +34,15 @@ dependencies {
 
     // Querydsl
     implementation("com.querydsl:querydsl-jpa")
+    kapt("com.querydsl:querydsl-apt:5.0.0:jpa")
+    kapt("org.springframework.boot:spring-boot-configuration-processor")
 
-    // Querydsl JPAAnnotationProcessor 사용 지정
-    implementation("com.querydsl:querydsl-apt:5.0.0")
-    // java.lang.NoClassDefFoundError(javax.annotation.Entity) 발생 대응
-    annotationProcessor("jakarta.persistence:jakarta.persistence-api")
-    // java.lang.NoClassDefFoundError(javax.annotation.Generated) 발생 대응
-    annotationProcessor("jakarta.annotation:jakarta.annotation-api")
+//    // Querydsl JPAAnnotationProcessor 사용 지정
+//    implementation("com.querydsl:querydsl-apt:5.0.0")
+//    // java.lang.NoClassDefFoundError(javax.annotation.Entity) 발생 대응
+//    annotationProcessor("jakarta.persistence:jakarta.persistence-api")
+//    // java.lang.NoClassDefFoundError(javax.annotation.Generated) 발생 대응
+//    annotationProcessor("jakarta.annotation:jakarta.annotation-api")
 
     runtimeOnly("com.h2database:h2")
     //runtimeOnly("mysql:mysql-connector-java")
