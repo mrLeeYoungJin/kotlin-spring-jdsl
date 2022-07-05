@@ -3,9 +3,11 @@ package com.lyjguy.kotlinspringjdsl.service
 import com.linecorp.kotlinjdsl.spring.data.SpringDataQueryFactory
 import com.linecorp.kotlinjdsl.spring.data.singleQuery
 import com.lyjguy.kotlinspringjdsl.model.entity.User
+import com.lyjguy.kotlinspringjdsl.repository.UserRepository
 import io.mockk.every
 import io.mockk.impl.annotations.InjectMockKs
 import io.mockk.impl.annotations.MockK
+import io.mockk.impl.annotations.RelaxedMockK
 import io.mockk.junit5.MockKExtension
 import io.mockk.mockk
 import org.assertj.core.api.Assertions.assertThat
@@ -17,6 +19,9 @@ import org.junit.jupiter.api.extension.ExtendWith
 class UserServiceTest {
     @MockK
     lateinit var queryFactory: SpringDataQueryFactory
+
+    @RelaxedMockK
+    lateinit var userRepository: UserRepository
 
     @InjectMockKs
     lateinit var userService: UserService
