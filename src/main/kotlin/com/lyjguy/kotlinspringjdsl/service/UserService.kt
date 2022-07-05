@@ -9,23 +9,40 @@ import com.lyjguy.kotlinspringjdsl.model.enum.UserType
 import com.lyjguy.kotlinspringjdsl.repository.UserRepository
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
+import javax.persistence.NoResultException
 import javax.persistence.Query
 
 @Service
 class UserService(
+    private val userRepository: UserRepository,
     private val queryFactory: SpringDataQueryFactory,
 ) {
 
     fun findById(id: Long): User? {
-        return queryFactory.singleQuery {
-            select(entity(User::class))
-            from(entity(User::class))
-            where(col(User::id).equal(id))
+        return try {
+            queryFactory.singleQuery {
+                select(entity(User::class))
+                from(entity(User::class))
+                where(col(User::id).equal(id))
+            }
+        } catch (nre: NoResultException) {
+            null
         }
     }
 
     @Transactional
     fun save() {
+        val user = User(
+            name = "test",
+            email = "test@test.com",
+            password = "1234",
+            userType = UserType.USER
+        )
+        userRepository.save(user)
+    }
+
+    @Transactional
+    fun update() {
         val query: Query = queryFactory.updateQuery<User> {
             //where(col(User::id).`in`(1000, 2000))
             setParams(
