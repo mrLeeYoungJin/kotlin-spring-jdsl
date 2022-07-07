@@ -1,0 +1,3 @@
+package com.lyjguy.kotlinspringjdsl.repository
+
+interface UserRepositoryCustom
