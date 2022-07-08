@@ -1,8 +1,11 @@
+import org.asciidoctor.gradle.jvm.AsciidoctorTask
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import org.springframework.boot.gradle.tasks.bundling.BootJar
 
 plugins {
     id("org.springframework.boot") version "2.7.0"
     id("io.spring.dependency-management") version "1.0.11.RELEASE"
+    id("org.asciidoctor.jvm.convert") version "3.3.2"
     kotlin("jvm") version "1.6.21"
     kotlin("plugin.spring") version "1.6.21"
     kotlin("plugin.jpa") version "1.6.21"
@@ -19,7 +22,14 @@ configurations {
     }
 }
 
+val snippetsDir by extra { file("build/generated-snippets") }
+
 repositories {
+    mavenLocal {
+        content {
+            includeGroup("org.springframework.restdocs")
+        }
+    }
     mavenCentral()
 }
 
@@ -49,6 +59,7 @@ dependencies {
     annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("io.mockk:mockk:1.12.4")
+    testImplementation("org.springframework.restdocs:spring-restdocs-mockmvc")
 }
 
 tasks.withType<KotlinCompile> {
@@ -58,6 +69,19 @@ tasks.withType<KotlinCompile> {
     }
 }
 
-tasks.withType<Test> {
+val test = tasks.withType<Test> {
     useJUnitPlatform()
+    outputs.dir(snippetsDir)
+}
+
+val asciidoctor = tasks.withType<AsciidoctorTask> {
+    inputs.dir(snippetsDir)
+    dependsOn(test)
+}
+
+tasks.withType<BootJar> {
+    dependsOn(asciidoctor)
+    from("$snippetsDir/html5") {
+        into("static/docs")
+    }
 }
