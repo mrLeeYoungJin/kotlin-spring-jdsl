@@ -75,13 +75,23 @@ val test = tasks.withType<Test> {
 }
 
 val asciidoctor = tasks.withType<AsciidoctorTask> {
-    inputs.dir(snippetsDir)
     dependsOn(test)
+    baseDirFollowsSourceDir()
+    doLast {
+        copy {
+            from("$outputDir")
+            into("src/main/resources/static/docs")
+        }
+    }
 }
 
 tasks.withType<BootJar> {
     dependsOn(asciidoctor)
-    from("$snippetsDir/html5") {
-        into("static/docs")
+    from("$snippetsDir") {
+        into("src/main/resources/static/docs")
     }
+}
+
+tasks.build {
+    dependsOn(asciidoctor)
 }
