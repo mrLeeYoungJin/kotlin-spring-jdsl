@@ -22,34 +22,34 @@ class UserRepositoryTest(
     private val userRepository: UserRepository,
 ) {
 
-    @Test
-    fun jpaQueryTest() {
-        userRepository.findById(1)
-    }
-
-    @Test
-    fun findById() {
-        try {
-            val id: Long = 1
-            val user: User? = queryFactory.singleQuery {
-                select(entity(User::class))
-                from(entity(User::class))
-                where(col(User::id).equal(id))
-            }
-            println("user : ${user}")
-        } catch (nre: NoResultException) {
-            println(0)
-        }
-    }
-
-    @Test
-    fun findAllById() {
-        val id: Long = 1
-        val user = queryFactory.listQuery<User> {
-            select(entity(User::class))
-            from(entity(User::class))
-            where(col(User::id).equal(id))
-        }
-        println("user : ${user}")
-    }
+//    @Test
+//    fun jpaQueryTest() {
+//        userRepository.findById(1)
+//    }
+//
+//    @Test
+//    fun findById() {
+//        try {
+//            val id: Long = 1
+//            val user: User? = queryFactory.singleQuery {
+//                select(entity(User::class))
+//                from(entity(User::class))
+//                where(col(User::id).equal(id))
+//            }
+//            println("user : ${user}")
+//        } catch (nre: NoResultException) {
+//            println(0)
+//        }
+//    }
+//
+//    @Test
+//    fun findAllById() {
+//        val id: Long = 1
+//        val user = queryFactory.listQuery<User> {
+//            select(entity(User::class))
+//            from(entity(User::class))
+//            where(col(User::id).equal(id))
+//        }
+//        println("user : ${user}")
+//    }
 }

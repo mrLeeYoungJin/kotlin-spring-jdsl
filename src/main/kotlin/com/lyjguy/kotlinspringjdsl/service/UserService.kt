@@ -1,9 +1,7 @@
 package com.lyjguy.kotlinspringjdsl.service
 
 import com.linecorp.kotlinjdsl.querydsl.expression.col
-import com.linecorp.kotlinjdsl.spring.data.SpringDataQueryFactory
-import com.linecorp.kotlinjdsl.spring.data.singleQuery
-import com.linecorp.kotlinjdsl.spring.data.updateQuery
+import com.linecorp.kotlinjdsl.spring.data.*
 import com.lyjguy.kotlinspringjdsl.model.entity.User
 import com.lyjguy.kotlinspringjdsl.model.enum.UserType
 import com.lyjguy.kotlinspringjdsl.repository.UserRepository
