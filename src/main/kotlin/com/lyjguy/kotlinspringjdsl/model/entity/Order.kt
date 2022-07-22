@@ -24,9 +24,7 @@ class Order(
     var updatedAt: LocalDateTime = LocalDateTime.now(),
 
 ) {
-//    @OneToOne(mappedBy = "order", fetch = FetchType.LAZY, cascade = [CascadeType.PERSIST])
     @JoinColumn(insertable = false, updatable = false)
     @OneToOne(mappedBy = "order", optional = false, fetch = FetchType.LAZY)
-    @JsonManagedReference
     lateinit var orderReceiver: OrderReceiver
 }

@@ -12,8 +12,7 @@ class OrderReceiver(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long = 0,
-//    @Column(name="order_id", insertable = false, updatable = false, nullable = false)
-//    var orderId: Long = 0,
+    val orderId: Long,
     var name: String,
     var address1: String,
     var address2: String,
@@ -22,14 +21,7 @@ class OrderReceiver(
     val updatedAt: LocalDateTime? = null,
 
     @OneToOne(optional = false, fetch = FetchType.LAZY)
-    @JoinColumn(name = "order_id", insertable = false, updatable = false, nullable = false)
+    @JoinColumn(name = "orderId", insertable = false, updatable = false, nullable = false)
     @JsonBackReference
     var order: Order
-) {
-    //@MapsId
-    //@OneToOne(fetch = FetchType.LAZY)
-    //@JoinColumn(name = "orderId")
-//    @OneToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "order_id")
-//    lateinit var order: Order
-}
+)
