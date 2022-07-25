@@ -8,6 +8,7 @@ import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest
+import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager
 import org.springframework.test.context.TestConstructor
 import javax.persistence.EntityManager
 
@@ -18,7 +19,6 @@ class UserRepositoryQueryDslTest(
     private val entityManager: EntityManager,
     private val userRepository: UserRepository,
 ) {
-
     private lateinit var queryFactory: JPAQueryFactory
 
     @BeforeEach
