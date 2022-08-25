@@ -50,6 +50,7 @@ dependencies {
     implementation("com.linecorp.kotlin-jdsl:spring-data-kotlin-jdsl-starter:2.0.3.RELEASE")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("io.springfox:springfox-swagger-ui:3.0.0")
+    implementation("io.springfox:springfox-swagger2:3.0.0")
 
     // Querydsl
     implementation("com.querydsl:querydsl-jpa")
