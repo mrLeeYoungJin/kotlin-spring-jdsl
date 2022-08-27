@@ -14,13 +14,14 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2
 @EnableSwagger2
 class SwaggerConfig {
     @Bean
-    fun restAPI(): Docket? {
+    fun restAPI(): Docket {
         return Docket(DocumentationType.SWAGGER_2)
-            .apiInfo(apiInfo())
+            .useDefaultResponseMessages(false)
             .select()
             .apis(RequestHandlerSelectors.basePackage("com.lyjguy.kotlinspringjdsl"))
-            .paths(PathSelectors.any())
+            .paths(PathSelectors.ant("/api/v1/**"))
             .build()
+            .apiInfo(apiInfo())
     }
 
     private fun apiInfo(): ApiInfo? {
