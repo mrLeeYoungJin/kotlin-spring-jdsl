@@ -22,8 +22,8 @@ class OrderReceiverService(
     }
 
     @Transactional
-    fun save(orderReceiver: OrderReceiver) {
-        orderReceiverRepository.save(orderReceiver)
+    fun save(orderReceiver: OrderReceiver): OrderReceiver {
+        return orderReceiverRepository.save(orderReceiver)
     }
 
     @Transactional
