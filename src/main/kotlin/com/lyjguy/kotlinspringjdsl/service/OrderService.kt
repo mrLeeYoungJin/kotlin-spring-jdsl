@@ -6,7 +6,6 @@ import com.linecorp.kotlinjdsl.spring.data.singleQuery
 import com.lyjguy.kotlinspringjdsl.model.dto.ReqOrderDto
 import com.lyjguy.kotlinspringjdsl.model.entity.Order
 import com.lyjguy.kotlinspringjdsl.model.entity.OrderReceiver
-import com.lyjguy.kotlinspringjdsl.model.entity.User
 import com.lyjguy.kotlinspringjdsl.repository.OrderRepository
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -31,7 +30,7 @@ class OrderService(
     }
 
     @Transactional
-    fun save(reqOrderDto: ReqOrderDto) {
+    fun save(reqOrderDto: ReqOrderDto): Order {
         val order = Order(
             userId = 1,
             name = reqOrderDto.name,
@@ -39,7 +38,7 @@ class OrderService(
             totalPrice = reqOrderDto.totalPrice,
         )
 
-        orderRepository.save(order).also {
+        val savedOrder = orderRepository.save(order).also {
             val orderReceiver = OrderReceiver(
                 orderId = it.id,
                 name = reqOrderDto.receiver.name,
@@ -48,9 +47,10 @@ class OrderService(
                 zipcode = reqOrderDto.receiver.zipcode,
                 order = it,
             )
-            val savedOrderReceiver = orderReceiverService.save(orderReceiver)
-            order.orderReceiver = orderReceiver
+            order.orderReceiver = orderReceiverService.save(orderReceiver)
         }
+
+        return savedOrder
     }
 
 }
