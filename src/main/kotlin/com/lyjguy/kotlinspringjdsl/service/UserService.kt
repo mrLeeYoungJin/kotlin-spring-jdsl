@@ -29,14 +29,14 @@ class UserService(
     }
 
     @Transactional
-    fun save() {
+    fun save(): User {
         val user = User(
             name = "test",
             email = "test@test.com",
             password = "1234",
             userType = UserType.USER
         )
-        userRepository.save(user)
+        return userRepository.save(user)
     }
 
     @Transactional
