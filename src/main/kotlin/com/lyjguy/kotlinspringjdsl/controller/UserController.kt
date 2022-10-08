@@ -17,7 +17,7 @@ class UserController(
 
     @ApiOperation(value = "사용자 동록")
     @PostMapping
-    fun createUser(): ResponseEntity<Unit> {
+    fun createUser(): ResponseEntity<User> {
         return ResponseEntity.ok(userService.save())
     }
 
