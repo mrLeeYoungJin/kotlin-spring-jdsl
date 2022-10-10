@@ -3,6 +3,7 @@ package com.lyjguy.kotlinspringjdsl.service
 import com.linecorp.kotlinjdsl.spring.data.SpringDataQueryFactory
 import com.linecorp.kotlinjdsl.spring.data.singleQuery
 import com.lyjguy.kotlinspringjdsl.model.entity.User
+import com.lyjguy.kotlinspringjdsl.model.enum.UserType
 import com.lyjguy.kotlinspringjdsl.repository.UserRepository
 import io.mockk.every
 import io.mockk.impl.annotations.InjectMockKs
@@ -40,5 +41,15 @@ class UserServiceTest {
 
     @Test
     fun save() {
+        val user = User(
+            name = "test",
+            email = "test@test.com",
+            password = "1234",
+            userType = UserType.USER
+        )
+
+        every { userRepository.save(any()) } returns user
+
+        userService.save()
     }
 }
