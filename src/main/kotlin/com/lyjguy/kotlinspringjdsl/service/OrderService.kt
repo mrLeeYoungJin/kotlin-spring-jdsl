@@ -2,6 +2,7 @@ package com.lyjguy.kotlinspringjdsl.service
 
 import com.linecorp.kotlinjdsl.querydsl.expression.col
 import com.linecorp.kotlinjdsl.spring.data.SpringDataQueryFactory
+import com.linecorp.kotlinjdsl.spring.data.listQuery
 import com.linecorp.kotlinjdsl.spring.data.singleQuery
 import com.lyjguy.kotlinspringjdsl.model.dto.ReqOrderDto
 import com.lyjguy.kotlinspringjdsl.model.entity.Order
@@ -26,6 +27,14 @@ class OrderService(
             }
         } catch (nre: NoResultException) {
             null
+        }
+    }
+
+    fun findAllByUserId(userId: Long): List<Order> {
+        return queryFactory.listQuery<Order> {
+            select(entity(Order::class))
+            from(entity(Order::class))
+            where(col(Order::userId).equal(userId))
         }
     }
 
