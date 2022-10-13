@@ -2,6 +2,7 @@ package com.lyjguy.kotlinspringjdsl.repository
 
 import com.linecorp.kotlinjdsl.querydsl.expression.col
 import com.linecorp.kotlinjdsl.spring.data.SpringDataQueryFactory
+import com.linecorp.kotlinjdsl.spring.data.listQuery
 import com.linecorp.kotlinjdsl.spring.data.singleQuery
 import com.lyjguy.kotlinspringjdsl.model.entity.Order
 import org.junit.jupiter.api.Test
@@ -33,5 +34,16 @@ class OrderRepositoryTest(
         } catch (nre: NoResultException) {
             println(0)
         }
+    }
+
+    @Test
+    fun findAllByUserId() {
+        val userId: Long = 1
+        val orderList = queryFactory.listQuery<Order> {
+            select(entity(Order::class))
+            from(entity(Order::class))
+            where(col(Order::userId).equal(userId))
+        }
+        println("orderList : $orderList")
     }
 }
