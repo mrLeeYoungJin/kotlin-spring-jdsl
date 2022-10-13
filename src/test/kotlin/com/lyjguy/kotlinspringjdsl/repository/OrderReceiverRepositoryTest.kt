@@ -20,7 +20,6 @@ import javax.persistence.NoResultException
 class OrderReceiverRepositoryTest(
     private val queryFactory: SpringDataQueryFactory,
 ) {
-
     @Test
     fun findById() {
         try {
